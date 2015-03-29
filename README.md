@@ -5,8 +5,12 @@
 
 Sistema de gerenciamento de tarefas usando [CakePHP](http://cakephp.org) 3.0, AngularJS, PHP e mySQL.
 
+## Requisitos
+1. PHP 5.4
+2. Apache 2.4
+3. mySQL 5
 
-## Installation
+## Instalacao
 
 1. Faca o download ou clone o repositorio.
 2. Crie um Virtual Host no Apache apontando para o diretorio webroot do projeto.

@@ -1,0 +1,71 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3" translate="aside.nav.TASKS">Tasks</h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      
+      <span ng-controller="ModalTaskCtrl">
+          <script type="text/ng-template" id="tasks-form.html">
+            <div ng-include="'tpl/tasks-form.html'"></div>
+          </script>
+          <button class="btn btn-success" ng-click="open('lg')" translate="add">Novo</button>
+        </span>
+      
+    </div>
+    <div class="table-responsive">
+      <table id="tasks-table" ui-jq="dataTable" ui-options="{
+          sAjaxSource: 'tarefas.json',
+          sAjaxDataProp: 'tarefas',
+          aoColumns: [
+            { mData: 'id' },
+            { mData: 'titulo' },
+            { mData: 'descricao' },
+            { mData: 'prioridade' }
+          ]
+        }" class="table table-striped m-b-none">
+        <thead>
+          <tr>
+            <th  style="width:20%">ID</th>
+            <th  style="width:25%">Título</th>
+            <th  style="width:25%">Descrição</th>
+            <th  style="width:15%">Prioridade</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#tasks-table tbody").sortable({
+    	cursor: "move",
+	    start:function(event, ui){
+	      startPosition = ui.item.prevAll().length + 1;
+	    },
+	    update: function(event, ui) {
+	      endPosition = ui.item.prevAll().length + 1;
+	      alert('Start Position: ' + startPosition + ' End Position: ' + endPosition);
+				/*var szUUIDList = "";
+		    $('#myQueryList input[name=uuidWhatever]').each(function(i){
+		        szUUIDList = szUUIDList + ',' + $(this).val();
+		    });
+		    $.getJSON('/path/to/handler.cfc', {
+		        method:'YourMethod',
+		        returnFormat:'JSON',
+		        listUUIDs:szUUIDList
+		    },
+		    function(data){
+		        if(data.intSuccess == 1){
+		            alert('Display order updated');
+		        } else {
+		            alert('Sorry, there was a problem updating the display order.');
+		        }
+		    });*/
+	     }
+		});
+	});
+
+</script>

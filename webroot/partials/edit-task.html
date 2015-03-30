@@ -1,0 +1,57 @@
+<div class="view">
+	<div class="container">
+		<div class="row">
+			<nav class= "navbar navbar-default" role= "navigation" >
+				<div class= "navbar-header" >
+					<a class= "navbar-brand" href= "#/"><i class="glyphicon glyphicon-th-large"></i> Voltar para a lista de tarefas </a>
+					<a data-ng-show="tarefa._id" class= "navbar-brand" href= "#/editar-tarefa/0"><i class="glyphicon glyphicon-plus"></i> Nova Tarefa </a>
+					<a data-ng-show="tarefa._id" class= "navbar-brand pull-right"><i class="glyphicon glyphicon-edit"></i> Editando Tarefa Numero: {{tarefa._id}}</a>
+				</div>
+			</nav>
+			<header>
+				<h3>{{title}}</h3>
+			</header>
+			<div class="col-md-12">
+				<form role="form" name="myForm" class="form-horizontal">
+					<div class="row">
+						<div class= "form-group" ng-class="{error: myForm.titulo.$invalid}">
+							<label class= "col-md-2">Título</label>
+							<div class="col-md-4">
+								<input name="titulo" data-ng-model="tarefa.titulo" type="text" class="form-control" placeholder="Título da Tarefa" required/>
+								<span ng-show="myForm.titulo.$dirty && myForm.titulo.$invalid" class="help-inline">Título Obrigatório</span>
+							</div>
+						</div>
+						<div class= "form-group">
+							<label class= "col-md-2">Descrição</label>
+							<div class="col-md-4">
+								<input name="descricao" data-ng-model="tarefa.descricao" type="text" class="form-control" placeholder="Descrição da Tarefa" required/>
+								<span ng-show="myForm.descricao.$dirty && myForm.descricao.$invalid" class="help-inline">Descrição Obrigatória</span>
+							</div>
+						</div>
+						<div class= "form-group">
+							<label class= "col-md-2">Prioridade</label>
+							<div class="col-md-4">
+								<input data-ng-model="tarefa.prioridade" type="number" class= "form-control" name="prioridade" placeholder="Prioridade"/>
+							</div>
+						</div>
+						<div class= "form-group">
+							<label class= "col-md-2"></label>
+							<div class="col-md-4">
+								<a href="#/" class="btn">Cancelar</a>
+								<button data-ng-click="saveItem(tarefa);"
+								ng-disabled="isClean() || myForm.$invalid"
+								class="btn btn-primary">
+									{{buttonText}}
+								</button>
+								<button data-ng-click="deleteItem(tarefa)"
+								data-ng-show="tarefa._id" class="btn btn-warning">
+									Remover
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

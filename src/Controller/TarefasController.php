@@ -13,7 +13,9 @@ class TarefasController extends AppController
 
     public function index()
     {
-        $tarefas = $this->Tarefas->find('all');
+        $tarefas = $this->Tarefas->find('all', [
+            'order' => 'prioridade'
+        ]);
         $this->set([
             'tarefas' => $tarefas,
             '_serialize' => ['tarefas']

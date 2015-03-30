@@ -63,6 +63,7 @@ class TarefasController extends AppController
             'message' => $message,
             '_serialize' => ['message']
         ]);
+        $this->reorder();
     }
 
     public function delete($id)
@@ -76,5 +77,30 @@ class TarefasController extends AppController
             'message' => $message,
             '_serialize' => ['message']
         ]);
+    }
+    
+    private function reorder(){
+        $tarefas = $this->Tarefas->find('all', [
+            'order' => 'prioridade'
+        ]);
+        
+        $i = 1;
+        foreach ($tarefas as $key => $value) {
+            $nova = [
+                'prioridade' => $i
+            ];            
+            
+            $tarefa = $this->Tarefas->get($value->id);
+            
+            $tarefa = $this->Tarefas->patchEntity($tarefa, $nova);
+            
+            if ($this->Tarefas->save($tarefa)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
+            }
+            
+            $i++;
+        }
     }
 }

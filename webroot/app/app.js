@@ -47,7 +47,7 @@ app.factory("services", ['$http', '$location', function($http, $location) {
 	return obj;
 }]);
 
-app.controller('listCtrl', function($scope, services) {
+app.controller('listCtrl', function($scope, $location, services) {
 	services.getList().then(function(data) {
 		$scope.tarefas = data.data.tarefas;
 		$("#tasks-table tbody").sortable({
@@ -56,24 +56,16 @@ app.controller('listCtrl', function($scope, services) {
 		      startPosition = ui.item.prevAll().length + 1;
 		    },
 		    update: function(event, ui) {
-		      endPosition = ui.item.prevAll().length + 1;
-		      //alert('Start Position: ' + startPosition + ' End Position: ' + endPosition);
-					/*var szUUIDList = "";
-			    $('#myQueryList input[name=uuidWhatever]').each(function(i){
-			        szUUIDList = szUUIDList + ',' + $(this).val();
-			    });
-			    $.getJSON('/path/to/handler.cfc', {
-			        method:'YourMethod',
-			        returnFormat:'JSON',
-			        listUUIDs:szUUIDList
-			    },
-			    function(data){
-			        if(data.intSuccess == 1){
-			            alert('Display order updated');
-			        } else {
-			            alert('Sorry, there was a problem updating the display order.');
-			        }
-			    });*/
+				endPosition = ui.item.prevAll().length;
+				if(endPosition > startPosition){
+					endPosition++;
+				}
+				var id = $(ui.item).find('td').first().html();
+				services.updateItem(id, {prioridade: endPosition}).then(function(){
+					 services.getList().then(function(data){
+						 $scope.tarefas = data.data.tarefas;
+					}); 
+				});
 		     }
 		});
 	});

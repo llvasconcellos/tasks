@@ -1,4 +1,4 @@
-# CakePHP Application Skeleton
+# Gerenciador de Tarefas
 
 [![Build Status](https://api.travis-ci.org/cakephp/app.png)](https://travis-ci.org/cakephp/app)
 [![License](https://poser.pugx.org/cakephp/app/license.svg)](https://packagist.org/packages/cakephp/app)
